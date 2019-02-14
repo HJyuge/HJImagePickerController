@@ -17,6 +17,7 @@
 		1B0D2F7D22155D2B001054AE /* HJImagePickerControllerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0D2F7C22155D2B001054AE /* HJImagePickerControllerUITests.m */; };
 		1B0D2F8F22155DEE001054AE /* HJImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0D2F8D22155DEE001054AE /* HJImagePickerController.m */; };
 		1B0D2F9022155DEE001054AE /* HJAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0D2F8E22155DEE001054AE /* HJAssetCell.m */; };
+		1B0D2F9322156E4A001054AE /* HJImagePickerSource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1B0D2F9222156E4A001054AE /* HJImagePickerSource.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		1B0D2F8D22155DEE001054AE /* HJImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJImagePickerController.m; sourceTree = "<group>"; };
 		1B0D2F8E22155DEE001054AE /* HJAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJAssetCell.m; sourceTree = "<group>"; };
 		1B0D2F9122155E72001054AE /* HJImagePickerConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJImagePickerConstant.h; sourceTree = "<group>"; };
+		1B0D2F9222156E4A001054AE /* HJImagePickerSource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HJImagePickerSource.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				1B0D2F8E22155DEE001054AE /* HJAssetCell.m */,
 				1B0D2F8C22155DEE001054AE /* HJImagePickerController.h */,
 				1B0D2F8D22155DEE001054AE /* HJImagePickerController.m */,
+				1B0D2F9222156E4A001054AE /* HJImagePickerSource.bundle */,
 			);
 			path = HJImagePickerController;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 			files = (
 				1B0D2F6522155D2B001054AE /* LaunchScreen.storyboard in Resources */,
 				1B0D2F6222155D2B001054AE /* Assets.xcassets in Resources */,
+				1B0D2F9322156E4A001054AE /* HJImagePickerSource.bundle in Resources */,
 				1B0D2F6022155D29001054AE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
