@@ -196,22 +196,30 @@
     HJAssetCell *cell = (HJAssetCell *)[collectionView cellForItemAtIndexPath:indexPath];
     PHAsset *asset = self.assetCollections[indexPath.row];
     if ([_selectedAssetModelsDic objectForKey:asset.localIdentifier]) {
-        [cell setIndicatorState:NO];
+        [cell setIndicatorStateWithIndex:0];
         HJAssetModel *model = [_selectedAssetModelsDic objectForKey:asset.localIdentifier];
+        model.cellIndexPath = nil;
         [_selectedAssetModelsDic removeObjectForKey:asset.localIdentifier];
         [self.selectedAssetModels removeObject:model];
+        [self assetModelsNeedSortAndUpdateIndicatorStateWithCollectionView:collectionView];
     }else{
-        [cell setIndicatorState:YES];
+        [cell setIndicatorStateWithIndex:self.selectedAssetModels.count+1];
         HJAssetModel *model = [HJAssetModel modelWithAsset:asset thumbnail:cell.thumbnail];
         [model setModelIsSelect:!model.selected selectedIndex:self.selectedAssetModels.count+1];
         [self.selectedAssetModels addObject:model];
+        model.cellIndexPath = indexPath;
         [_selectedAssetModelsDic setObject:model forKey:asset.localIdentifier];
     }
 }
 
-- (void)assetModelsRemoveModel:(NSInteger)index needSort:(BOOL)need {
-    if(need == NO) return;
-    
+- (void)assetModelsNeedSortAndUpdateIndicatorStateWithCollectionView:(UICollectionView *)collectionView{
+    NSInteger count = 1;
+    for(HJAssetModel *model in self.selectedAssetModels) {
+        [model selectedIndex:count];
+        HJAssetCell *cell = (HJAssetCell *)[collectionView cellForItemAtIndexPath:model.cellIndexPath];
+        [cell setIndicatorStateWithIndex:count];
+        count++;
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

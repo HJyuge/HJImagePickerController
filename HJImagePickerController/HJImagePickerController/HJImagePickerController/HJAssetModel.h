@@ -16,10 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign,readonly) BOOL selected;
 @property (nonatomic, assign,readonly) NSInteger selectedIndex;
 @property (nonatomic, strong) UIImage *thumbnail;
+@property (nonatomic, strong,nullable) NSIndexPath *cellIndexPath;
 
 + (instancetype)modelWithAsset:(PHAsset *)asset;
 + (instancetype)modelWithAsset:(PHAsset *)asset thumbnail:(UIImage * _Nullable )thumbnail;
 
+- (void)selectedIndex:(NSInteger)selectedIndex;
 - (void)setModelIsSelect:(BOOL)selected selectedIndex:(NSInteger)selectedIndex;
 
 @end

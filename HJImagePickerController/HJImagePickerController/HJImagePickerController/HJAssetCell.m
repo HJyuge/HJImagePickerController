@@ -13,6 +13,7 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIImageView *selectedIndicator;
 @property (nonatomic, strong) UIImageView *maskImageView;
+@property (nonatomic, strong) UILabel     *countLabel;
 
 @end
 
@@ -30,7 +31,7 @@
         CGFloat width = 20.0;
         CGFloat margin = 2;
         self.selectedIndicator = [[UIImageView alloc]initWithFrame:CGRectMake(self.contentView.bounds.size.width - width - margin , margin, width, width)];
-        self.selectedIndicator.contentMode = UIViewContentModeScaleAspectFill;
+        self.selectedIndicator.contentMode = UIViewContentModeScaleToFill;
         self.selectedIndicator.clipsToBounds = YES;
         self.selectedIndicator.image = [HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorNormal];
         [self.contentView addSubview:self.selectedIndicator];
@@ -38,6 +39,13 @@
 //        self.maskImageView = [[UIImageView alloc]initWithFrame:self.contentView.bounds];
 //        self.maskImageView.image = [UIImage imageNamed:@""];
 //        [self.contentView addSubview:self.maskImageView];
+        
+        self.countLabel = [[UILabel alloc]initWithFrame:_selectedIndicator.bounds];
+        self.countLabel.text = @"";
+        self.countLabel.textColor = [UIColor whiteColor];
+        self.countLabel.font = [UIFont systemFontOfSize:14];
+        self.countLabel.textAlignment = NSTextAlignmentCenter;
+        [self.selectedIndicator addSubview:_countLabel];
         
     }
     return self;
@@ -53,6 +61,11 @@
 
 - (void)setIndicatorState:(BOOL)state {
     self.selectedIndicator.image = state?[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorSelected]:[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorNormal];;
+}
+
+- (void)setIndicatorStateWithIndex:(NSInteger)index {
+    self.selectedIndicator.image = index > 0?[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorSelectedIndex]:[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorNormal];
+    self.countLabel.text = index > 0 ? @(index).stringValue:@"";
 }
 
 @end

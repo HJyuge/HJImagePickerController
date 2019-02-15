@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,readonly) UIImage *thumbnail;
 - (void)setCellImage:(UIImage *)image;
 - (void)setIndicatorState:(BOOL)state;
-
+- (void)setIndicatorStateWithIndex:(NSInteger)index;
 @end
 
 @protocol UICollectionViewCellDelegate <NSObject>

@@ -40,6 +40,11 @@
     return self;
 }
 
+- (void)selectedIndex:(NSInteger)selectedIndex {
+    _selectedIndex = selectedIndex;
+}
+
+
 - (void)setModelIsSelect:(BOOL)selected selectedIndex:(NSInteger)selectedIndex {
     self.selected = selected;
     self.selectedIndex = selected?selectedIndex:0;
