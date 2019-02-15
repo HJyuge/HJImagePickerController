@@ -10,6 +10,7 @@
 #import <Photos/Photos.h>
 #import "HJAssetCell.h"
 #import "HJImagePickerConstant.h"
+#import "HJAssetModel.h"
 
 #define cellMargin 3
 #define numberOfColumn 4
@@ -19,6 +20,9 @@
 }
 @property (nonatomic, copy) NSArray *fetchResults;
 @property (nonatomic, copy) NSArray *assetCollections;
+@property (nonatomic, strong) NSMutableArray *selectedAssetModels;
+@property (nonatomic, strong) NSMutableDictionary *selectedAssetModelsDic;
+
 @property (nonatomic, strong) UIView *bottomView;
 @end
 
@@ -30,7 +34,8 @@
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(doneClikeCancelButton)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"More" style:UIBarButtonItemStyleDone target:self action:@selector(doneClikeMoreButton)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:HJBundleSourceNaviBack] style:UIBarButtonItemStyleDone target:self action:@selector(doneClikeMoreButton)];
+    self.navigationItem.leftBarButtonItem.tintColor = [UIColor blackColor];
     self.navigationItem.title = @"相机胶卷";
     
     PHFetchResult *smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAny options:nil];
@@ -138,7 +143,8 @@
         }
     }
     self.assetCollections = assets;
-
+    self.selectedAssetModels = [@[] mutableCopy];
+    self.selectedAssetModelsDic = [@{} mutableCopy];
 }
 #pragma mark- Button
 - (void)doneClikeMoreButton {
@@ -180,13 +186,31 @@
                                options:nil
                          resultHandler:^(UIImage * result, NSDictionary * info) {
                              if (cell.tag == indexPath.row) {
-                                 cell.imageView.image = result;
+                                 [cell setCellImage:result];
                              }
                          }];
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    HJAssetCell *cell = (HJAssetCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    PHAsset *asset = self.assetCollections[indexPath.row];
+    if ([_selectedAssetModelsDic objectForKey:asset.localIdentifier]) {
+        [cell setIndicatorState:NO];
+        HJAssetModel *model = [_selectedAssetModelsDic objectForKey:asset.localIdentifier];
+        [_selectedAssetModelsDic removeObjectForKey:asset.localIdentifier];
+        [self.selectedAssetModels removeObject:model];
+    }else{
+        [cell setIndicatorState:YES];
+        HJAssetModel *model = [HJAssetModel modelWithAsset:asset thumbnail:cell.thumbnail];
+        [model setModelIsSelect:!model.selected selectedIndex:self.selectedAssetModels.count+1];
+        [self.selectedAssetModels addObject:model];
+        [_selectedAssetModelsDic setObject:model forKey:asset.localIdentifier];
+    }
+}
+
+- (void)assetModelsRemoveModel:(NSInteger)index needSort:(BOOL)need {
+    if(need == NO) return;
     
 }
 

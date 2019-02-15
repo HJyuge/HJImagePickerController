@@ -7,6 +7,14 @@
 //
 
 #import "HJAssetCell.h"
+#import "HJImagePickerConstant.h"
+
+@interface HJAssetCell ()
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UIImageView *selectedIndicator;
+@property (nonatomic, strong) UIImageView *maskImageView;
+
+@end
 
 @implementation HJAssetCell
 
@@ -19,22 +27,32 @@
         self.imageView.clipsToBounds = YES;
         [self.contentView addSubview:self.imageView];
         
-        self.selectedIndicator = [[UIImageView alloc]initWithFrame:CGRectMake(self.contentView.bounds.size.width - 10 - 5 , 5, 10, 10)];
+        CGFloat width = 20.0;
+        CGFloat margin = 2;
+        self.selectedIndicator = [[UIImageView alloc]initWithFrame:CGRectMake(self.contentView.bounds.size.width - width - margin , margin, width, width)];
         self.selectedIndicator.contentMode = UIViewContentModeScaleAspectFill;
         self.selectedIndicator.clipsToBounds = YES;
-        self.selectedIndicator.image = [UIImage imageNamed:@""];
+        self.selectedIndicator.image = [HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorNormal];
         [self.contentView addSubview:self.selectedIndicator];
         
-        self.maskImageView = [[UIImageView alloc]initWithFrame:self.contentView.bounds];
-        self.maskImageView.image = [UIImage imageNamed:@""];
-        [self.contentView addSubview:self.maskImageView];
+//        self.maskImageView = [[UIImageView alloc]initWithFrame:self.contentView.bounds];
+//        self.maskImageView.image = [UIImage imageNamed:@""];
+//        [self.contentView addSubview:self.maskImageView];
         
     }
     return self;
 }
 
+- (UIImage *)thumbnail {
+    return self.imageView.image;
+}
+
+- (void)setCellImage:(UIImage *)image {
+    self.imageView.image = image;
+}
+
 - (void)setIndicatorState:(BOOL)state {
-    self.selectedIndicator.image = state?[UIImage imageNamed:@""]:[UIImage imageNamed:@""];
+    self.selectedIndicator.image = state?[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorSelected]:[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorNormal];;
 }
 
 @end

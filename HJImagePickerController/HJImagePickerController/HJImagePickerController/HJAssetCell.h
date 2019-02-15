@@ -14,11 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface HJAssetCell : UICollectionViewCell
-@property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) UIImageView *selectedIndicator;
-@property (nonatomic, strong) UIImageView *maskImageView;
-
+@property (nonatomic,readonly) UIImage *thumbnail;
+- (void)setCellImage:(UIImage *)image;
 - (void)setIndicatorState:(BOOL)state;
+
 @end
 
 @protocol UICollectionViewCellDelegate <NSObject>
