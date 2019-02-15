@@ -64,7 +64,7 @@
 }
 
 - (void)setIndicatorStateWithIndex:(NSInteger)index {
-    self.selectedIndicator.image = index > 0?[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorSelectedIndex]:[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorNormal];
+    self.selectedIndicator.image = index > 0?[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorSelectedCount]:[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorNormal];
     self.countLabel.text = index > 0 ? @(index).stringValue:@"";
 }
 

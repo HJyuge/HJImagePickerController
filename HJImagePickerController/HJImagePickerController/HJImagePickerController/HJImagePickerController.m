@@ -198,9 +198,11 @@
     if ([_selectedAssetModelsDic objectForKey:asset.localIdentifier]) {
         [cell setIndicatorStateWithIndex:0];
         HJAssetModel *model = [_selectedAssetModelsDic objectForKey:asset.localIdentifier];
+        //先移除model
         model.cellIndexPath = nil;
         [_selectedAssetModelsDic removeObjectForKey:asset.localIdentifier];
         [self.selectedAssetModels removeObject:model];
+        //重新排序
         [self assetModelsNeedSortAndUpdateIndicatorStateWithCollectionView:collectionView];
     }else{
         [cell setIndicatorStateWithIndex:self.selectedAssetModels.count+1];

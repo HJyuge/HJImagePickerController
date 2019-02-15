@@ -27,6 +27,7 @@
 
 UIKIT_EXTERN NSString *const HJBundleSourceNaviBack;
 UIKIT_EXTERN NSString *const HJBundleSourceIndicatorSelectedIndex;
+UIKIT_EXTERN NSString *const HJBundleSourceIndicatorSelectedCount;
 UIKIT_EXTERN NSString *const HJBundleSourceIndicatorNormal;
 UIKIT_EXTERN NSString *const HJBundleSourceIndicatorSelected;
 

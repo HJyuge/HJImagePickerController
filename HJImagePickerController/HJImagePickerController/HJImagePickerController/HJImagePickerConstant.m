@@ -12,6 +12,7 @@
 
 NSString *const HJBundleSourceNaviBack = @"image_nav_back";
 NSString *const HJBundleSourceIndicatorSelectedIndex = @"image_select_index";
+NSString *const HJBundleSourceIndicatorSelectedCount = @"preview_number_icon";
 NSString *const HJBundleSourceIndicatorNormal = @"image_select_normal";
 NSString *const HJBundleSourceIndicatorSelected = @"image_select_selected";
 
