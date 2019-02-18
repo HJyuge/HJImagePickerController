@@ -24,7 +24,7 @@
 @property (nonatomic, copy) NSArray *assetCollections;
 @property (nonatomic, strong) NSMutableArray *selectedAssetModels;
 @property (nonatomic, strong) NSMutableDictionary *selectedAssetModelsDic;
-
+@property (nonatomic, strong) UIButton *determineSelectedImagesBtn;
 @property (nonatomic, strong) UIView *bottomView;
 @end
 
@@ -72,9 +72,12 @@
         [collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.assetCollections.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
     }
     UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(collectionView.frame), kScreenWidth, 50)];
-    bottomView.backgroundColor = [UIColor darkGrayColor];
+    bottomView.backgroundColor = [UIColor colorWithRed:41/255.0 green:43/255.0 blue:50/255.0 alpha:1];
+    [self.view addSubview:bottomView];
+    self.bottomView = bottomView;
+    
     UIButton *previewbtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 5, 60, 40)];
-    previewbtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    previewbtn.titleLabel.font = [UIFont systemFontOfSize:16];
     [previewbtn setTitle:@"预览" forState:UIControlStateNormal];
     [previewbtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [previewbtn addTarget:self action:@selector(didClickPreViewBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -83,15 +86,17 @@
     HJSelectOriginImageView *selectOriginImageView = [[HJSelectOriginImageView alloc]initWithFrame:CGRectMake((kScreenWidth - 60)/2, 5, 60, 40)];
     [bottomView addSubview:selectOriginImageView];
     
-    UIButton *determinebtn = [[UIButton alloc]initWithFrame:CGRectMake(kScreenWidth - 60 - 15, 5, 60, 40)];
+    UIButton *determinebtn = [[UIButton alloc]initWithFrame:CGRectMake(kScreenWidth - 64 - 12, 10, 64, 30)];
     [determinebtn setTitle:@"发送" forState:UIControlStateNormal];
     determinebtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [determinebtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [determinebtn setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
+    [determinebtn setBackgroundColor:[UIColor colorWithRed:8/255.0 green:190/255.0 blue:8/255.0 alpha:1]];
+    determinebtn.layer.cornerRadius = 5;
+    determinebtn.layer.masksToBounds = YES;
+//    [determinebtn setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
     [determinebtn addTarget:self action:@selector(didClickOrginDeterminebtn:) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:determinebtn];
-    [self.view addSubview:bottomView];
-    self.bottomView = bottomView;
+    self.determineSelectedImagesBtn = determinebtn;
 }
 
 - (void)updateAssetCollections
@@ -212,6 +217,8 @@
         model.cellIndexPath = indexPath;
         [_selectedAssetModelsDic setObject:model forKey:asset.localIdentifier];
     }
+    NSString *selectedCount = self.selectedAssetModels.count > 0? [NSString stringWithFormat:@"发送(%ld)",self.selectedAssetModels.count]:@"发送";
+    [self.determineSelectedImagesBtn setTitle:selectedCount forState:UIControlStateNormal];
 }
 
 - (void)assetModelsNeedSortAndUpdateIndicatorStateWithCollectionView:(UICollectionView *)collectionView{

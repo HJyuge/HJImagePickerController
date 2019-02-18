@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@class HJSelectOriginImageView;
+@class HJSelectOriginImageView,HJDetermineSelectedImagesView;
 @interface HJImagePickerView : UIView
 
 @end
@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly,getter=isSelected) BOOL selected;
 @end
 
+@interface HJDetermineSelectedImagesView : UIView
 
+@end
 
 NS_ASSUME_NONNULL_END

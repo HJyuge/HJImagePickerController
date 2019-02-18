@@ -20,7 +20,9 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qGP-82-5qD">
                                 <rect key="frame" x="149" y="120" width="77" height="30"/>
-                                <state key="normal" title="图片选择器"/>
+                                <state key="normal" title="图片选择器">
+                                    <color key="titleColor" red="0.091949414971023893" green="0.83322097081218272" blue="0.029429506905696259" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="didClickImageBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aGa-Ze-WwX"/>
                                 </connections>

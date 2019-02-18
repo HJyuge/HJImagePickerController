@@ -15,8 +15,6 @@
 
 @implementation HJImagePickerView
 
-
-
 @end
 
 @interface HJSelectOriginImageView()
@@ -73,12 +71,32 @@
     
 }
 
-
 - (void)didClickButton:(UIButton *)button {
     button.selected = !button.selected;
     _selected = button.selected;
     self.imageView.image = _selected?[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorSelectedOrigin]:nil;
 }
 
+@end
+
+
+@interface HJDetermineSelectedImagesView ()
+
+@end
+
+@implementation HJDetermineSelectedImagesView
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setUpView];
+    }
+    return self;
+}
+
+- (void)setUpView {
+    
+}
 
 @end
