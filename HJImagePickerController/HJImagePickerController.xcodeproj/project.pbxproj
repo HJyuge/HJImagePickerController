@@ -20,6 +20,7 @@
 		1B0D2F9522164B6E001054AE /* HJImagePickerConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0D2F9422164B6E001054AE /* HJImagePickerConstant.m */; };
 		1B0D2F9722164F5F001054AE /* HJImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1B0D2F9622164F5F001054AE /* HJImagePickerController.bundle */; };
 		1B0D2F9A22165897001054AE /* HJAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0D2F9922165897001054AE /* HJAssetModel.m */; };
+		1B0D2FA7221A4A48001054AE /* HJAblumsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0D2FA6221A4A48001054AE /* HJAblumsController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,10 @@
 		1B0D2F9622164F5F001054AE /* HJImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HJImagePickerController.bundle; sourceTree = "<group>"; };
 		1B0D2F9822165897001054AE /* HJAssetModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJAssetModel.h; sourceTree = "<group>"; };
 		1B0D2F9922165897001054AE /* HJAssetModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJAssetModel.m; sourceTree = "<group>"; };
+		1B0D2FA5221A4A48001054AE /* HJAblumsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJAblumsController.h; sourceTree = "<group>"; };
+		1B0D2FA6221A4A48001054AE /* HJAblumsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJAblumsController.m; sourceTree = "<group>"; };
+		1B0D2FA8221A5E98001054AE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		1B0D2FA9221A5E98001054AE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +163,8 @@
 				1B0D2F9922165897001054AE /* HJAssetModel.m */,
 				1B0D2F8C22155DEE001054AE /* HJImagePickerController.h */,
 				1B0D2F8D22155DEE001054AE /* HJImagePickerController.m */,
+				1B0D2FA5221A4A48001054AE /* HJAblumsController.h */,
+				1B0D2FA6221A4A48001054AE /* HJAblumsController.m */,
 				1B0D2F9622164F5F001054AE /* HJImagePickerController.bundle */,
 			);
 			path = HJImagePickerController;
@@ -295,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B0D2F9A22165897001054AE /* HJAssetModel.m in Sources */,
+				1B0D2FA7221A4A48001054AE /* HJAblumsController.m in Sources */,
 				1B0D2F5D22155D29001054AE /* ViewController.m in Sources */,
 				1B0D2F6822155D2B001054AE /* main.m in Sources */,
 				1B0D2F5A22155D29001054AE /* AppDelegate.m in Sources */,
@@ -340,6 +348,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				1B0D2F5F22155D29001054AE /* Base */,
+				1B0D2FA8221A5E98001054AE /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -348,6 +357,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				1B0D2F6422155D2B001054AE /* Base */,
+				1B0D2FA9221A5E98001054AE /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -359,6 +369,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -418,6 +429,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

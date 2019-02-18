@@ -11,6 +11,7 @@
 #import "HJAssetCell.h"
 #import "HJImagePickerConstant.h"
 #import "HJAssetModel.h"
+#import "HJAblumsController.h"
 
 #define cellMargin 3
 #define numberOfColumn 4
@@ -148,7 +149,8 @@
 }
 #pragma mark- Button
 - (void)doneClikeMoreButton {
-    
+    HJAblumsController *ablumsController = [[HJAblumsController alloc]init];
+    [self.navigationController pushViewController:ablumsController animated:YES];
 }
 
 - (void)doneClikeCancelButton {
