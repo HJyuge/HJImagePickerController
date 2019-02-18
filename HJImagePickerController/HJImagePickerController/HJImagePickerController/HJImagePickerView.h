@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@class HJSelectOriginImageView,HJDetermineSelectedImagesView;
+@class HJSelectOriginImageView,HJImagePickerBottomView;
 @interface HJImagePickerView : UIView
 
 @end
@@ -18,7 +18,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly,getter=isSelected) BOOL selected;
 @end
 
-@interface HJDetermineSelectedImagesView : UIView
+@protocol HJImagePickerBottomViewDelegate;
+@interface HJImagePickerBottomView : UIView
+@property (nonatomic, weak)id<HJImagePickerBottomViewDelegate>delegate;
+- (void)updateDetermineBtnTitle:(NSString *)title;
+@end
+
+@protocol HJImagePickerBottomViewDelegate <NSObject>
+- (void)didClickPreViewBtn;
+- (void)didClickOrginDeterminebtn;
 
 @end
 
