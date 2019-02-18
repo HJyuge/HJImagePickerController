@@ -12,6 +12,7 @@
 #import "HJImagePickerConstant.h"
 #import "HJAssetModel.h"
 #import "HJAblumsController.h"
+#import "HJImagePickerView.h"
 
 #define cellMargin 3
 #define numberOfColumn 4
@@ -78,13 +79,10 @@
     [previewbtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [previewbtn addTarget:self action:@selector(didClickPreViewBtn:) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:previewbtn];
-    UIButton *orginImagebtn = [[UIButton alloc]initWithFrame:CGRectMake((kScreenWidth - 60)/2, 5, 60, 40)];
-    [orginImagebtn setTitle:@"原图" forState:UIControlStateNormal];
-    orginImagebtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [orginImagebtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [orginImagebtn setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
-    [orginImagebtn addTarget:self action:@selector(didClickOrginImagebtn:) forControlEvents:UIControlEventTouchUpInside];
-    [bottomView addSubview:orginImagebtn];
+    
+    HJSelectOriginImageView *selectOriginImageView = [[HJSelectOriginImageView alloc]initWithFrame:CGRectMake((kScreenWidth - 60)/2, 5, 60, 40)];
+    [bottomView addSubview:selectOriginImageView];
+    
     UIButton *determinebtn = [[UIButton alloc]initWithFrame:CGRectMake(kScreenWidth - 60 - 15, 5, 60, 40)];
     [determinebtn setTitle:@"发送" forState:UIControlStateNormal];
     determinebtn.titleLabel.font = [UIFont systemFontOfSize:15];

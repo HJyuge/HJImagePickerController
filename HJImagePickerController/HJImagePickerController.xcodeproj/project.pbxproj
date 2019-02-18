@@ -21,6 +21,7 @@
 		1B0D2F9722164F5F001054AE /* HJImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1B0D2F9622164F5F001054AE /* HJImagePickerController.bundle */; };
 		1B0D2F9A22165897001054AE /* HJAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0D2F9922165897001054AE /* HJAssetModel.m */; };
 		1B0D2FA7221A4A48001054AE /* HJAblumsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0D2FA6221A4A48001054AE /* HJAblumsController.m */; };
+		1B0D2FAC221A8177001054AE /* HJImagePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0D2FAB221A8177001054AE /* HJImagePickerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,8 @@
 		1B0D2FA6221A4A48001054AE /* HJAblumsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJAblumsController.m; sourceTree = "<group>"; };
 		1B0D2FA8221A5E98001054AE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		1B0D2FA9221A5E98001054AE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		1B0D2FAA221A8177001054AE /* HJImagePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJImagePickerView.h; sourceTree = "<group>"; };
+		1B0D2FAB221A8177001054AE /* HJImagePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJImagePickerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +168,8 @@
 				1B0D2F8D22155DEE001054AE /* HJImagePickerController.m */,
 				1B0D2FA5221A4A48001054AE /* HJAblumsController.h */,
 				1B0D2FA6221A4A48001054AE /* HJAblumsController.m */,
+				1B0D2FAA221A8177001054AE /* HJImagePickerView.h */,
+				1B0D2FAB221A8177001054AE /* HJImagePickerView.m */,
 				1B0D2F9622164F5F001054AE /* HJImagePickerController.bundle */,
 			);
 			path = HJImagePickerController;
@@ -308,6 +313,7 @@
 				1B0D2F5A22155D29001054AE /* AppDelegate.m in Sources */,
 				1B0D2F8F22155DEE001054AE /* HJImagePickerController.m in Sources */,
 				1B0D2F9022155DEE001054AE /* HJAssetCell.m in Sources */,
+				1B0D2FAC221A8177001054AE /* HJImagePickerView.m in Sources */,
 				1B0D2F9522164B6E001054AE /* HJImagePickerConstant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

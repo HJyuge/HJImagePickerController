@@ -23,6 +23,11 @@
     HJImagePickerController *imagePickerController = [[HJImagePickerController alloc]init];
     UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:imagePickerController];
     [self presentViewController:navigationController animated:YES completion:nil];
+    
+    
+    
+    
+    
 }
 
 

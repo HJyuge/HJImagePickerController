@@ -28,7 +28,7 @@
         self.imageView.clipsToBounds = YES;
         [self.contentView addSubview:self.imageView];
         
-        CGFloat width = 20.0;
+        CGFloat width = 24.0;
         CGFloat margin = 2;
         self.selectedIndicator = [[UIImageView alloc]initWithFrame:CGRectMake(self.contentView.bounds.size.width - width - margin , margin, width, width)];
         self.selectedIndicator.contentMode = UIViewContentModeScaleToFill;

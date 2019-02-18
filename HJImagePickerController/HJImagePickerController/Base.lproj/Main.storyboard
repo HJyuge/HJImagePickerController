@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qGP-82-5qD">
-                                <rect key="frame" x="149" y="318.5" width="77" height="30"/>
+                                <rect key="frame" x="149" y="120" width="77" height="30"/>
                                 <state key="normal" title="图片选择器"/>
                                 <connections>
                                     <action selector="didClickImageBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aGa-Ze-WwX"/>
@@ -28,7 +28,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="qGP-82-5qD" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="iDX-7Q-Ab7"/>
+                            <constraint firstItem="qGP-82-5qD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="MdW-0r-b1b"/>
                             <constraint firstItem="qGP-82-5qD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ruD-86-zEN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
