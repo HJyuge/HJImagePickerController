@@ -34,7 +34,7 @@
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(doneClikeCancelButton)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:HJBundleSourceNaviBack] style:UIBarButtonItemStyleDone target:self action:@selector(doneClikeMoreButton)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceNaviBack] style:UIBarButtonItemStyleDone target:self action:@selector(doneClikeMoreButton)];
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor blackColor];
     self.navigationItem.title = @"相机胶卷";
     
