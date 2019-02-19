@@ -13,16 +13,19 @@
 
 @interface HJPhotoPreviewController ()
 @property (nonatomic, strong) HJImagePickerBottomView *bottomView;
-@property (nonatomic, strong) NSArray<PHAsset *> *asset;
-
+@property (nonatomic, strong) NSArray<PHAsset *> *assets;
+@property (nonatomic, strong) NSMutableArray<HJAssetModel *> *selectedAssetModels;
+@property (nonatomic, strong) NSMutableDictionary *selectedAssetModelsDic;
 @end
 
 @implementation HJPhotoPreviewController
 
-- (instancetype)initWithPreviewPhotos:(NSArray<PHAsset *> *)asset selectedPhoto:(NSArray<HJAssetModel *> *)assetModels{
+- (instancetype)initWithPreviewPhotos:(NSArray<PHAsset *> *)assets selectedPhoto:(NSArray<HJAssetModel *> *)assetModels selectedDic:(NSDictionary *)selectedDic{
     self = [super init];
     if (self) {
-        
+        self.assets = [assets copy];
+        self.selectedAssetModels = [assetModels mutableCopy];
+        self.selectedAssetModelsDic = [selectedDic mutableCopy];
     }
     return self;
 }
@@ -34,6 +37,17 @@
 
 - (void)setUpView {
     
+    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorNormal] style:UIBarButtonItemStyleDone target:self action:@selector(doneClikeSelectButton:)];
+//    UIImageView *selectedIndicator = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 24, 24)];
+//    selectedIndicator.contentMode = UIViewContentModeScaleToFill;
+//    selectedIndicator.clipsToBounds = YES;
+//    selectedIndicator.image = [HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorNormal];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:selectedIndicator];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceNaviBack] style:UIBarButtonItemStyleDone target:self action:@selector(doneClikeBackButton)];
+    
     UIScrollView *scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight)];
     
     scrollView.pagingEnabled = YES;
@@ -44,6 +58,14 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     
+}
+
+- (void)doneClikeSelectButton:(UIBarButtonItem *)barButtonItem{
+//    barButtonItem.image
+}
+
+- (void)doneClikeBackButton {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

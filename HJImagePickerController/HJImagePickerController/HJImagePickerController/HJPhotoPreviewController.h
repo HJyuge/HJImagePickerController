@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HJPhotoPreviewController : UIViewController
-- (instancetype)initWithPreviewPhotos:(NSArray<PHAsset *> *)asset selectedPhoto:(NSArray<HJAssetModel *> *)assetModels;
+- (instancetype)initWithPreviewPhotos:(NSArray<PHAsset *> *)assets selectedPhoto:(NSArray<HJAssetModel *> *)assetModels selectedDic:(NSDictionary *)selectedDic;
 @end
 
 NS_ASSUME_NONNULL_END

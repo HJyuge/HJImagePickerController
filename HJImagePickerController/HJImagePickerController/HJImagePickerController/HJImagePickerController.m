@@ -13,6 +13,7 @@
 #import "HJAssetModel.h"
 #import "HJAblumsController.h"
 #import "HJImagePickerView.h"
+#import "HJPhotoPreviewController.h"
 
 #define cellMargin 3
 #define numberOfColumn 4
@@ -22,7 +23,7 @@
 }
 @property (nonatomic, copy) NSArray *fetchResults;
 @property (nonatomic, copy) NSArray *assetCollections;
-@property (nonatomic, strong) NSMutableArray *selectedAssetModels;
+@property (nonatomic, strong) NSMutableArray<HJAssetModel *> *selectedAssetModels;
 @property (nonatomic, strong) NSMutableDictionary *selectedAssetModelsDic;
 @property (nonatomic, strong) HJImagePickerBottomView *bottomView;
 @end
@@ -138,7 +139,8 @@
 }
 
 - (void)didClickPreViewBtn:(UIButton *)btn {
-    
+    HJPhotoPreviewController *photoPreviewController = [[HJPhotoPreviewController alloc]initWithPreviewPhotos:self.assetCollections selectedPhoto:self.selectedAssetModels selectedDic:self.selectedAssetModelsDic];
+    [self.navigationController pushViewController:photoPreviewController animated:YES];
 }
 
 - (void)didClickOrginImagebtn:(UIButton *)btn{
