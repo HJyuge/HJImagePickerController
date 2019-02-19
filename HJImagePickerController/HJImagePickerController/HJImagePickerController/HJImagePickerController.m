@@ -171,6 +171,13 @@
                                  [cell setCellImage:result];
                              }
                          }];
+    PHAsset *asset = self.assetCollections[indexPath.row];
+    if ([_selectedAssetModelsDic objectForKey:asset.localIdentifier]) {
+        HJAssetModel *model = [_selectedAssetModelsDic objectForKey:asset.localIdentifier];
+        [cell setIndicatorStateWithIndex:model.selectedIndex];
+    }else {
+        [cell setIndicatorStateWithIndex:0];
+    }
     return cell;
 }
 
@@ -185,7 +192,7 @@
         [_selectedAssetModelsDic removeObjectForKey:asset.localIdentifier];
         [self.selectedAssetModels removeObject:model];
         //重新排序
-        [self assetModelsNeedSortAndUpdateIndicatorStateWithCollectionView:collectionView];
+        [self sortModelsAndUpdateIndicatorState:collectionView];
     }else{
         [cell setIndicatorStateWithIndex:self.selectedAssetModels.count+1];
         HJAssetModel *model = [HJAssetModel modelWithAsset:asset thumbnail:cell.thumbnail];
@@ -198,7 +205,7 @@
     [self.bottomView updateDetermineBtnTitle:selectedCount];
 }
 
-- (void)assetModelsNeedSortAndUpdateIndicatorStateWithCollectionView:(UICollectionView *)collectionView{
+- (void)sortModelsAndUpdateIndicatorState:(UICollectionView *)collectionView{
     NSInteger count = 1;
     for(HJAssetModel *model in self.selectedAssetModels) {
         [model selectedIndex:count];
