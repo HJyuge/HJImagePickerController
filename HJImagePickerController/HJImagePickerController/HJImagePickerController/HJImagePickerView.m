@@ -75,12 +75,15 @@
     button.selected = !button.selected;
     _selected = button.selected;
     self.imageView.image = _selected?[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorSelectedOrigin]:nil;
+    if ([self.delegate respondsToSelector:@selector(didClickOriginImageViewWithState:)]) {
+        [self.delegate didClickOriginImageViewWithState:_selected];
+    }
 }
 
 @end
 
 
-@interface HJImagePickerBottomView ()
+@interface HJImagePickerBottomView ()<HJSelectOriginImageViewDelegate>
 @property (nonatomic, strong) UIButton *determineSelectedImagesBtn;
 @end
 
@@ -116,9 +119,16 @@
     determinebtn.layer.cornerRadius = 5;
     determinebtn.layer.masksToBounds = YES;
     //    [determinebtn setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
-    [determinebtn addTarget:self action:@selector(didClickOrginDeterminebtn:) forControlEvents:UIControlEventTouchUpInside];
+    [determinebtn addTarget:self action:@selector(didClickDeterminebtn:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:determinebtn];
     self.determineSelectedImagesBtn = determinebtn;
+}
+
+- (void)didClickOriginImageViewWithState:(BOOL)selected {
+    _selected = selected;
+    if ([self.delegate respondsToSelector:@selector(didClickOriginbtnWithState:)]) {
+        [self.delegate didClickOriginbtnWithState:selected];
+    }
 }
 
 - (void)updateDetermineBtnTitle:(NSString *)title {
@@ -131,9 +141,9 @@
     }
 }
 
-- (void)didClickOrginDeterminebtn:(UIButton *)button{
-    if ([self.delegate respondsToSelector:@selector(didClickOrginDeterminebtn)]) {
-        [self.delegate didClickOrginDeterminebtn];
+- (void)didClickDeterminebtn:(UIButton *)button{
+    if ([self.delegate respondsToSelector:@selector(didClickDeterminebtn)]) {
+        [self.delegate didClickDeterminebtn];
     }
 }
 

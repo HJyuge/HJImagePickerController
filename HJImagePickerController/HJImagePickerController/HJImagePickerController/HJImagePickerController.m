@@ -18,7 +18,7 @@
 #define cellMargin 3
 #define numberOfColumn 4
 
-@interface HJImagePickerController ()<UICollectionViewDelegate,UICollectionViewDataSource>{
+@interface HJImagePickerController ()<UICollectionViewDelegate,UICollectionViewDataSource,HJImagePickerBottomViewDelegate>{
     CGFloat _cellWidth;
 }
 @property (nonatomic, copy) NSArray *fetchResults;
@@ -73,6 +73,7 @@
     }
     HJImagePickerBottomView *bottomView = [[HJImagePickerBottomView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(collectionView.frame), kScreenWidth, 50)];
     bottomView.backgroundColor = [UIColor colorWithRed:41/255.0 green:43/255.0 blue:50/255.0 alpha:1];
+    bottomView.delegate = self;
     [self.view addSubview:bottomView];
     self.bottomView = bottomView;
 }
@@ -128,7 +129,9 @@
     self.selectedAssetModels = [@[] mutableCopy];
     self.selectedAssetModelsDic = [@{} mutableCopy];
 }
-#pragma mark- Button
+#pragma mark- Interaction
+
+
 - (void)doneClikeMoreButton {
     HJAblumsController *ablumsController = [[HJAblumsController alloc]init];
     [self.navigationController pushViewController:ablumsController animated:YES];
@@ -143,13 +146,15 @@
     [self.navigationController pushViewController:photoPreviewController animated:YES];
 }
 
-- (void)didClickOrginImagebtn:(UIButton *)btn{
-    btn.selected = !btn.selected;
+- (void)didClickOriginbtn {
     
 }
 
-- (void)didClickOrginDeterminebtn:(UIButton *)btn{
-    btn.selected = !btn.selected;
+- (void)didClickPreViewBtn {
+    
+}
+
+- (void)didClickOrginDeterminebtn{
     
 }
 
