@@ -34,6 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @protocol HJImagePickerBottomViewDelegate <NSObject>
+@optional;
 - (void)didClickPreViewBtn;
 - (void)didClickOriginbtnWithState:(BOOL)selected;
 - (void)didClickDeterminebtn;

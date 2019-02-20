@@ -75,7 +75,7 @@
     button.selected = !button.selected;
     [self setOriginImageViewState:button.selected];
     if ([self.delegate respondsToSelector:@selector(didClickOriginImageViewWithState:)]) {
-        [self.delegate didClickOriginImageViewWithState:_selected];
+        [self.delegate didClickOriginImageViewWithState:button.selected];
     }
 }
 
@@ -123,6 +123,7 @@
     [self addSubview:previewbtn];
     
     HJSelectOriginImageView *selectOriginImageView = [[HJSelectOriginImageView alloc]initWithFrame:CGRectMake((kScreenWidth - 60)/2, 5, 60, 40)];
+    selectOriginImageView.delegate = self;
     [selectOriginImageView setOriginImageViewState:self.selectedOriginBtn];
     [self addSubview:selectOriginImageView];
     
