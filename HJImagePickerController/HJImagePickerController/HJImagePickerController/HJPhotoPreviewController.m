@@ -121,6 +121,9 @@ HJImagePickerCellIndicatorDelegate
 }
 
 - (void)doneClikeBackButton {
+    if ([self.delegate respondsToSelector:@selector(endPreViewPhoto:selectedOriginImage:)]) {
+        [self.delegate endPreViewPhoto:self.tempAssetModels selectedOriginImage:self.bottomView.isSelected];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 

@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol HJImagePickerBottomViewDelegate;
 @interface HJImagePickerBottomView : UIView
-@property (nonatomic, readonly,getter=isSelected) BOOL selected;
+@property (nonatomic,getter=isSelected) BOOL selected;
 @property (nonatomic, weak)id<HJImagePickerBottomViewDelegate>delegate;
 - (instancetype)initWithFrame:(CGRect)frame selectedOriginBtn:(BOOL)selected;
 - (void)updateDetermineBtnTitle:(NSString *)title;

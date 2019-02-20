@@ -18,7 +18,12 @@
 #define cellMargin 3
 #define numberOfColumn 4
 
-@interface HJImagePickerController ()<UICollectionViewDelegate,UICollectionViewDataSource,HJImagePickerBottomViewDelegate>{
+@interface HJImagePickerController ()<
+UICollectionViewDelegate,
+UICollectionViewDataSource,
+HJImagePickerBottomViewDelegate,
+HJPhotoPreviewControllerDelegate
+>{
     CGFloat _cellWidth;
 }
 @property (nonatomic, copy) NSArray *fetchResults;
@@ -26,6 +31,7 @@
 @property (nonatomic, strong) NSMutableArray<HJAssetModel *> *selectedAssetModels;
 @property (nonatomic, strong) NSMutableDictionary *selectedAssetModelsDic;
 @property (nonatomic, strong) HJImagePickerBottomView *bottomView;
+@property (nonatomic, strong) UICollectionView *collectionView;
 @end
 
 @implementation HJImagePickerController
@@ -57,6 +63,7 @@
     collectionView.dataSource = self;
     collectionView.backgroundColor = [UIColor whiteColor];
     [collectionView registerClass:[HJAssetCell class] forCellWithReuseIdentifier:NSStringFromClass([HJAssetCell class])];
+    self.collectionView = collectionView;
     
     if (@available(iOS 11.0, *)) {
         collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -145,11 +152,23 @@
 
 - (void)didClickPreViewBtn {
     HJPhotoPreviewController *photoPreviewController = [[HJPhotoPreviewController alloc]initWithSelectedPhoto:self.selectedAssetModels selectedOriginImage:self.bottomView.isSelected];
+    photoPreviewController.delegate = self;
     [self.navigationController pushViewController:photoPreviewController animated:YES];
 }
 
 - (void)didClickOrginDeterminebtn{
     
+}
+
+#pragma mark- HJPhotoPreviewControllerDelegate
+- (void)endPreViewPhoto:(NSMutableArray<HJAssetModel *> *)assetModels selectedOriginImage:(BOOL)selected {
+    self.selectedAssetModels = assetModels;
+    self.bottomView.selected = selected;
+    [self.selectedAssetModelsDic removeAllObjects];
+    for (HJAssetModel *assetModel in assetModels) {
+        [_selectedAssetModelsDic setObject:assetModel forKey:assetModel.asset.localIdentifier];
+    }
+    [self.collectionView reloadData];
 }
 
 #pragma mark- UICollectionView
