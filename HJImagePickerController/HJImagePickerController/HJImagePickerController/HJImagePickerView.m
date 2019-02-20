@@ -168,3 +168,43 @@
 }
 
 @end
+
+@interface HJImagePickerCellIndicator ()
+@property (nonatomic, strong) UIImageView *selectedIndicator;
+@property (nonatomic, strong) UILabel     *countLabel;
+@end
+
+@implementation HJImagePickerCellIndicator
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+//        CGFloat width = 24.0;
+        self.selectedIndicator = [[UIImageView alloc]initWithFrame:self.bounds];
+        self.selectedIndicator.contentMode = UIViewContentModeScaleToFill;
+        self.selectedIndicator.clipsToBounds = YES;
+        self.selectedIndicator.image = [HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorNormal];
+        [self addSubview:self.selectedIndicator];
+        
+        self.countLabel = [[UILabel alloc]initWithFrame:_selectedIndicator.bounds];
+        self.countLabel.text = @"";
+        self.countLabel.textColor = [UIColor whiteColor];
+        self.countLabel.font = [UIFont systemFontOfSize:14];
+        self.countLabel.textAlignment = NSTextAlignmentCenter;
+        [self.selectedIndicator addSubview:_countLabel];
+        
+    }
+    return self;
+}
+
+- (void)setIndicatorState:(BOOL)state {
+    self.selectedIndicator.image = state?[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorSelected]:[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorNormal];
+}
+
+- (void)setIndicatorStateWithIndex:(NSInteger)index {
+    self.selectedIndicator.image = index > 0?[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorSelectedCount]:[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorNormal];
+    self.countLabel.text = index > 0 ? @(index).stringValue:@"";
+}
+
+@end

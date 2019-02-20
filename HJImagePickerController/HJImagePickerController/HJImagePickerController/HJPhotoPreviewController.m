@@ -12,7 +12,7 @@
 #import <Photos/Photos.h>
 #import "HJAssetModel.h"
 
-@interface HJPhotoPreviewController ()<HJImagePickerBottomViewDelegate>
+@interface HJPhotoPreviewController ()<HJImagePickerBottomViewDelegate,UIScrollViewDelegate>
 @property (nonatomic, strong) HJImagePickerBottomView *bottomView;
 @property (nonatomic, strong) NSArray<PHAsset *> *assets;
 @property (nonatomic, strong) NSMutableArray<HJAssetModel *> *selectedAssetModels;
@@ -63,7 +63,7 @@
     NSInteger index = 0;
     CGFloat imageViewWidth = scrollView.bounds.size.width;
     CGFloat imageViewHeight = scrollView.bounds.size.height;
-    
+    scrollView.delegate = self;
     for (HJAssetModel *model in self.selectedAssetModels) {
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(index * imageViewWidth, 0, imageViewWidth, imageViewHeight)];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -111,6 +111,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - HJImagePickerBottomViewDelegate
 - (void)didClickOriginbtnWithState:(BOOL)selected {
     
 }
@@ -118,5 +119,8 @@
 - (void)didClickDeterminebtn {
     
 }
+
+#pragma mark - UIScrollViewDelegate
+
 
 @end

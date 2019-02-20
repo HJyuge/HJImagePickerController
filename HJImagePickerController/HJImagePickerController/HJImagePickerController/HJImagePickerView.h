@@ -41,4 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface HJImagePickerCellIndicator : UIView
+- (void)setIndicatorState:(BOOL)state;
+- (void)setIndicatorStateWithIndex:(NSInteger)index;
+@end
+
 NS_ASSUME_NONNULL_END
