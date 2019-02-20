@@ -80,6 +80,7 @@ HJImagePickerCellIndicatorDelegate
         PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
         options.resizeMode = PHImageRequestOptionsResizeModeExact;
         options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+        //PHImageManagerMaximumSize
         [imageManager requestImageForAsset:model.asset
                                 targetSize:CGSizeMake(imageViewWidth * [UIScreen mainScreen].scale, imageViewHeight * [UIScreen mainScreen].scale)
                                contentMode:PHImageContentModeAspectFill
