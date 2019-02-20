@@ -141,17 +141,13 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)didClickPreViewBtn:(UIButton *)btn {
-    HJPhotoPreviewController *photoPreviewController = [[HJPhotoPreviewController alloc]initWithPreviewPhotos:self.assetCollections selectedPhoto:self.selectedAssetModels selectedDic:self.selectedAssetModelsDic];
-    [self.navigationController pushViewController:photoPreviewController animated:YES];
-}
-
 - (void)didClickOriginbtn {
     
 }
 
 - (void)didClickPreViewBtn {
-    
+    HJPhotoPreviewController *photoPreviewController = [[HJPhotoPreviewController alloc]initWithPreviewPhotos:self.assetCollections selectedPhoto:self.selectedAssetModels selectedDic:self.selectedAssetModelsDic];
+    [self.navigationController pushViewController:photoPreviewController animated:YES];
 }
 
 - (void)didClickOrginDeterminebtn{

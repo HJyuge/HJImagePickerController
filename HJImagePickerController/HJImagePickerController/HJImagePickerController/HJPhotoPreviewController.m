@@ -30,14 +30,27 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+//    self.navigationController.navigationBar.backgroundColor = [UIColor blackColor]; [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+//    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor]; [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpView];
 }
 
 - (void)setUpView {
-    
-    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorNormal] style:UIBarButtonItemStyleDone target:self action:@selector(doneClikeSelectButton:)];
 //    UIImageView *selectedIndicator = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 24, 24)];
