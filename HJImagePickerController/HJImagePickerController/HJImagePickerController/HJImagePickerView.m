@@ -140,7 +140,7 @@
 }
 
 - (void)setOriginBtnState:(BOOL)selected {
-    self.
+    
 }
 
 - (void)updateDetermineBtnTitle:(NSString *)title {
