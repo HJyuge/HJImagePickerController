@@ -73,7 +73,7 @@ HJImagePickerCellIndicatorDelegate
     scrollView.tag = displayScrollViewTag;
     for (HJAssetModel *model in self.selectedAssetModels) {
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(index * imageViewWidth, 0, imageViewWidth, imageViewHeight)];
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.clipsToBounds = YES;
         imageView.tag = index;
         PHImageManager *imageManager = [PHImageManager defaultManager];
@@ -83,7 +83,7 @@ HJImagePickerCellIndicatorDelegate
         //PHImageManagerMaximumSize
         [imageManager requestImageForAsset:model.asset
                                 targetSize:CGSizeMake(imageViewWidth * [UIScreen mainScreen].scale, imageViewHeight * [UIScreen mainScreen].scale)
-                               contentMode:PHImageContentModeAspectFill
+                               contentMode:PHImageContentModeAspectFit
                                    options:options
                              resultHandler:^(UIImage * result, NSDictionary * info) {
                                  if (imageView.tag == index) {
