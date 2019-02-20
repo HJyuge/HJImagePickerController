@@ -163,7 +163,7 @@ HJPhotoPreviewControllerDelegate
 #pragma mark- HJPhotoPreviewControllerDelegate
 - (void)endPreViewPhoto:(NSMutableArray<HJAssetModel *> *)assetModels selectedOriginImage:(BOOL)selected {
     self.selectedAssetModels = assetModels;
-    self.bottomView.selected = selected;
+    [self.bottomView setOriginBtnState:selected];
     [self.selectedAssetModelsDic removeAllObjects];
     for (HJAssetModel *assetModel in assetModels) {
         [_selectedAssetModelsDic setObject:assetModel forKey:assetModel.asset.localIdentifier];

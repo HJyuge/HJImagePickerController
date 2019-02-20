@@ -86,7 +86,7 @@
 
 @end
 
-
+static NSInteger const selectOriginImageViewTag = 50;
 @interface HJImagePickerBottomView ()<HJSelectOriginImageViewDelegate>
 @property (nonatomic, strong) UIButton *determineSelectedImagesBtn;
 @property (nonatomic, assign) BOOL selectedOriginBtn;
@@ -114,7 +114,6 @@
 
 - (void)setUpView {
     self.backgroundColor = [UIColor colorWithRed:41/255.0 green:43/255.0 blue:50/255.0 alpha:1];
-    
     UIButton *previewbtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 5, 60, 40)];
     previewbtn.titleLabel.font = [UIFont systemFontOfSize:16];
     [previewbtn setTitle:@"预览" forState:UIControlStateNormal];
@@ -124,6 +123,7 @@
     
     HJSelectOriginImageView *selectOriginImageView = [[HJSelectOriginImageView alloc]initWithFrame:CGRectMake((kScreenWidth - 60)/2, 5, 60, 40)];
     selectOriginImageView.delegate = self;
+    selectOriginImageView.tag = selectOriginImageViewTag;
     [selectOriginImageView setOriginImageViewState:self.selectedOriginBtn];
     [self addSubview:selectOriginImageView];
     
@@ -141,7 +141,12 @@
 }
 
 - (void)setOriginBtnState:(BOOL)selected {
-    
+   NSArray *views = [self.subviews filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self.tag = %ld",selectOriginImageViewTag]];
+    if (views.count > 0) {
+        HJSelectOriginImageView *selectOriginImageView = views.firstObject;
+        [selectOriginImageView setOriginImageViewState:selected];
+    }
+    _selected = selected;
 }
 
 - (void)updateDetermineBtnTitle:(NSString *)title {

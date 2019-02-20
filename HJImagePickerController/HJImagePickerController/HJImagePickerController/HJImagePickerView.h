@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HJSelectOriginImageView : UIView
 @property (nonatomic, readonly,getter=isSelected) BOOL selected;
 @property (nonatomic, weak)id<HJSelectOriginImageViewDelegate>delegate;
-//- (void)setOriginImageViewState:(BOOL)selected;
+- (void)setOriginImageViewState:(BOOL)selected;
 @end
 @protocol HJSelectOriginImageViewDelegate <NSObject>
 - (void)didClickOriginImageViewWithState:(BOOL)selected;
@@ -26,11 +26,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol HJImagePickerBottomViewDelegate;
 @interface HJImagePickerBottomView : UIView
-@property (nonatomic,getter=isSelected) BOOL selected;
+@property (nonatomic, readonly ,getter=isSelected) BOOL selected;
 @property (nonatomic, weak)id<HJImagePickerBottomViewDelegate>delegate;
 - (instancetype)initWithFrame:(CGRect)frame selectedOriginBtn:(BOOL)selected;
 - (void)updateDetermineBtnTitle:(NSString *)title;
-//- (void)setOriginBtnState:(BOOL)selected;
+- (void)setOriginBtnState:(BOOL)selected;
 @end
 
 @protocol HJImagePickerBottomViewDelegate <NSObject>
