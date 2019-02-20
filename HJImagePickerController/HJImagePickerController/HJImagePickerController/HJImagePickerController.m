@@ -49,8 +49,6 @@
     
     _cellWidth = (kScreenWidth - cellMargin * (numberOfColumn + 1))/numberOfColumn;
     
-//    PHImageManager *manager = [PHImageManager defaultManager];
-    
     self.view.backgroundColor = [UIColor whiteColor];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
@@ -141,12 +139,12 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)didClickOriginbtn {
+- (void)didClickOriginbtnWithState:(BOOL)selected {
     
 }
 
 - (void)didClickPreViewBtn {
-    HJPhotoPreviewController *photoPreviewController = [[HJPhotoPreviewController alloc]initWithPreviewPhotos:self.assetCollections selectedPhoto:self.selectedAssetModels selectedDic:self.selectedAssetModelsDic];
+    HJPhotoPreviewController *photoPreviewController = [[HJPhotoPreviewController alloc]initWithSelectedPhoto:self.selectedAssetModels selectedDic:self.selectedAssetModelsDic selectedOriginImage:self.bottomView.isSelected];
     [self.navigationController pushViewController:photoPreviewController animated:YES];
 }
 
