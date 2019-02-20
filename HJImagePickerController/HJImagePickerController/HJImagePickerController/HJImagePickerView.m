@@ -73,11 +73,15 @@
 
 - (void)didClickButton:(UIButton *)button {
     button.selected = !button.selected;
-    _selected = button.selected;
-    self.imageView.image = _selected?[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorSelectedOrigin]:nil;
+    [self setOriginImageViewState:button.selected];
     if ([self.delegate respondsToSelector:@selector(didClickOriginImageViewWithState:)]) {
         [self.delegate didClickOriginImageViewWithState:_selected];
     }
+}
+
+- (void)setOriginImageViewState:(BOOL)selected {
+    _selected = selected;
+    self.imageView.image = _selected?[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorSelectedOrigin]:nil;
 }
 
 @end
@@ -85,6 +89,7 @@
 
 @interface HJImagePickerBottomView ()<HJSelectOriginImageViewDelegate>
 @property (nonatomic, strong) UIButton *determineSelectedImagesBtn;
+@property (nonatomic, assign) BOOL selectedOriginBtn;
 @end
 
 @implementation HJImagePickerBottomView
@@ -93,6 +98,15 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        [self setUpView];
+    }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame selectedOriginBtn:(BOOL)selected {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.selectedOriginBtn = selected;
         [self setUpView];
     }
     return self;
@@ -109,6 +123,7 @@
     [self addSubview:previewbtn];
     
     HJSelectOriginImageView *selectOriginImageView = [[HJSelectOriginImageView alloc]initWithFrame:CGRectMake((kScreenWidth - 60)/2, 5, 60, 40)];
+    [selectOriginImageView setOriginImageViewState:self.selectedOriginBtn];
     [self addSubview:selectOriginImageView];
     
     UIButton *determinebtn = [[UIButton alloc]initWithFrame:CGRectMake(kScreenWidth - 64 - 12, 10, 64, 30)];
@@ -124,15 +139,19 @@
     self.determineSelectedImagesBtn = determinebtn;
 }
 
+- (void)setOriginBtnState:(BOOL)selected {
+    self.
+}
+
+- (void)updateDetermineBtnTitle:(NSString *)title {
+    [self.determineSelectedImagesBtn setTitle:title forState:UIControlStateNormal];
+}
+
 - (void)didClickOriginImageViewWithState:(BOOL)selected {
     _selected = selected;
     if ([self.delegate respondsToSelector:@selector(didClickOriginbtnWithState:)]) {
         [self.delegate didClickOriginbtnWithState:selected];
     }
-}
-
-- (void)updateDetermineBtnTitle:(NSString *)title {
-    [self.determineSelectedImagesBtn setTitle:title forState:UIControlStateNormal];
 }
 
 - (void)didClickPreViewBtn:(UIButton *)button{
