@@ -12,21 +12,28 @@
 #import <Photos/Photos.h>
 #import "HJAssetModel.h"
 
-@interface HJPhotoPreviewController ()<HJImagePickerBottomViewDelegate,UIScrollViewDelegate>
+static NSInteger const displayScrollViewTag = 100;
+@interface HJPhotoPreviewController ()<
+HJImagePickerBottomViewDelegate,
+UIScrollViewDelegate,
+HJImagePickerCellIndicatorDelegate
+>
 @property (nonatomic, strong) HJImagePickerBottomView *bottomView;
 @property (nonatomic, strong) NSArray<PHAsset *> *assets;
 @property (nonatomic, strong) NSMutableArray<HJAssetModel *> *selectedAssetModels;
-@property (nonatomic, strong) NSMutableDictionary *selectedAssetModelsDic;
+@property (nonatomic, strong) NSMutableArray<HJAssetModel *> *tempAssetModels;
 @property (nonatomic, assign) BOOL selectedOriginImage;
+@property (nonatomic, strong) HJImagePickerCellIndicator *naviItemIndicator;
+@property (nonatomic, assign) NSInteger currentDisplayIndex;
 @end
 
 @implementation HJPhotoPreviewController
 
-- (instancetype)initWithSelectedPhoto:(NSArray<HJAssetModel *> *)assetModels selectedDic:(NSDictionary *)selectedDic selectedOriginImage:(BOOL)selected;{
+- (instancetype)initWithSelectedPhoto:(NSArray<HJAssetModel *> *)assetModels selectedOriginImage:(BOOL)selected;{
     self = [super init];
     if (self) {
         self.selectedAssetModels = [assetModels mutableCopy];
-        self.selectedAssetModelsDic = [selectedDic mutableCopy];
+        self.tempAssetModels = [assetModels mutableCopy];
         self.selectedOriginImage = selected;
     }
     return self;
@@ -50,12 +57,10 @@
 - (void)setUpView {
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorNormal] style:UIBarButtonItemStyleDone target:self action:@selector(doneClikeSelectButton:)];
-//    UIImageView *selectedIndicator = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 24, 24)];
-//    selectedIndicator.contentMode = UIViewContentModeScaleToFill;
-//    selectedIndicator.clipsToBounds = YES;
-//    selectedIndicator.image = [HJImagePickerConstant imageNamedFromBundle:HJBundleSourceIndicatorNormal];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:selectedIndicator];
+    HJImagePickerCellIndicator *selectedIndicator = [[HJImagePickerCellIndicator alloc]initWithFrame:CGRectMake(0, 0, 24, 24)];
+    selectedIndicator.delegate = self;
+    self.naviItemIndicator = selectedIndicator;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:selectedIndicator];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[HJImagePickerConstant imageNamedFromBundle:HJBundleSourceNaviBack] style:UIBarButtonItemStyleDone target:self action:@selector(doneClikeBackButton)];
     
@@ -64,6 +69,8 @@
     CGFloat imageViewWidth = scrollView.bounds.size.width;
     CGFloat imageViewHeight = scrollView.bounds.size.height;
     scrollView.delegate = self;
+    scrollView.pagingEnabled = YES;
+    scrollView.tag = displayScrollViewTag;
     for (HJAssetModel *model in self.selectedAssetModels) {
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(index * imageViewWidth, 0, imageViewWidth, imageViewHeight)];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -86,7 +93,7 @@
         index ++;
     }
     [scrollView setContentSize:CGSizeMake(imageViewWidth * self.selectedAssetModels.count, imageViewHeight)];
-    scrollView.pagingEnabled = YES;
+    
     if (@available(iOS 11.0, *)) {
         scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         scrollView.scrollIndicatorInsets = scrollView.contentInset;
@@ -95,11 +102,17 @@
     }
     [self.view addSubview:scrollView];
     
+    if (self.selectedAssetModels > 0) {
+        [self.naviItemIndicator setIndicatorStateWithIndex:1];
+    }
+    
     HJImagePickerBottomView *bottomView = [[HJImagePickerBottomView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(scrollView.frame) + 90, kScreenWidth, 50) selectedOriginBtn:self.selectedOriginImage];
     bottomView.backgroundColor = [UIColor colorWithRed:41/255.0 green:43/255.0 blue:50/255.0 alpha:1];
     bottomView.delegate = self;
     [self.view addSubview:bottomView];
     self.bottomView = bottomView;
+    NSString *selectedCount = self.selectedAssetModels.count > 0? [NSString stringWithFormat:@"发送(%ld)",self.selectedAssetModels.count]:@"发送";
+    [self.bottomView updateDetermineBtnTitle:selectedCount];
     
 }
 
@@ -109,6 +122,31 @@
 
 - (void)doneClikeBackButton {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - HJImagePickerCellIndicatorDelegate
+- (void)didClickIndicatorWithState:(BOOL)state Index:(NSInteger)index {
+    HJAssetModel *model = [self.selectedAssetModels objectAtIndex:_currentDisplayIndex];
+    if (state) {
+        [_naviItemIndicator setIndicatorStateWithIndex:0];
+        [model setModelIsSelect:NO selectedIndex:0];
+        [_tempAssetModels removeObject:model];
+    }else{
+        [_naviItemIndicator setIndicatorStateWithIndex:_tempAssetModels.count+1];
+        [model setModelIsSelect:YES selectedIndex:_tempAssetModels.count+1];
+        [_tempAssetModels addObject:model];
+    }
+    [self sortModelsAndUpdateIndicatorState:_naviItemIndicator];
+    NSString *selectedCount = _tempAssetModels.count > 0? [NSString stringWithFormat:@"发送(%ld)",_tempAssetModels.count]:@"发送";
+    [self.bottomView updateDetermineBtnTitle:selectedCount];
+}
+
+- (void)sortModelsAndUpdateIndicatorState:(HJImagePickerCellIndicator *)indicator{
+    NSInteger count = 1;
+    for(HJAssetModel *model in _tempAssetModels) {
+        [model selectedIndex:count];
+        count++;
+    }
 }
 
 #pragma mark - HJImagePickerBottomViewDelegate
@@ -121,6 +159,16 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-
-
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (displayScrollViewTag == scrollView.tag) {
+        //房租超出边界改变index
+        if (scrollView.contentOffset.x < 0 || scrollView.contentOffset.x > scrollView.contentSize.width) {
+            return;
+        }
+        NSInteger currentIndex = scrollView.contentOffset.x/kScreenWidth;
+        _currentDisplayIndex = currentIndex;
+        HJAssetModel *model = [self.selectedAssetModels objectAtIndex:currentIndex];
+        [self.naviItemIndicator setIndicatorStateWithIndex:model.selectedIndex];
+    }
+}
 @end

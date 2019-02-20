@@ -38,12 +38,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)didClickPreViewBtn;
 - (void)didClickOriginbtnWithState:(BOOL)selected;
 - (void)didClickDeterminebtn;
-
 @end
 
+@protocol HJImagePickerCellIndicatorDelegate;
 @interface HJImagePickerCellIndicator : UIView
+@property (nonatomic, weak)id<HJImagePickerCellIndicatorDelegate>delegate;
+@property (nonatomic, assign) BOOL needGestureRecognizer;
 - (void)setIndicatorState:(BOOL)state;
 - (void)setIndicatorStateWithIndex:(NSInteger)index;
 @end
-
+@protocol HJImagePickerCellIndicatorDelegate <NSObject>
+@optional;
+- (void)didClickIndicatorWithState:(BOOL)state Index:(NSInteger)index;
+@end
 NS_ASSUME_NONNULL_END

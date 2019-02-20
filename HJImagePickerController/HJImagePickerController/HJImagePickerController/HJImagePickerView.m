@@ -194,8 +194,25 @@
         self.countLabel.textAlignment = NSTextAlignmentCenter;
         [self.selectedIndicator addSubview:_countLabel];
         
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didClikeIndicator)];
+        [self addGestureRecognizer:tapGestureRecognizer];
     }
     return self;
+}
+
+- (void)setNeedGestureRecognizer:(BOOL)needGestureRecognizer {
+    _needGestureRecognizer = needGestureRecognizer;
+    for (UIGestureRecognizer *recognizer in self.gestureRecognizers) {
+        if ([recognizer isKindOfClass:[UITapGestureRecognizer class]]) {
+            recognizer.enabled = needGestureRecognizer;
+        }
+    }
+}
+
+- (void)didClikeIndicator{
+    if ([self.delegate respondsToSelector:@selector(didClickIndicatorWithState:Index:)]) {
+        [self.delegate didClickIndicatorWithState:(_countLabel.text.integerValue > 0) Index:_countLabel.text.integerValue];
+    }
 }
 
 - (void)setIndicatorState:(BOOL)state {

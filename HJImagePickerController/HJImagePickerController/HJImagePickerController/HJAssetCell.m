@@ -31,6 +31,7 @@
         CGFloat width = 24.0;
         CGFloat margin = 2;
         self.selectedIndicator = [[HJImagePickerCellIndicator alloc]initWithFrame:CGRectMake(self.bounds.size.width - width - margin , margin, width, width)];
+        self.selectedIndicator.needGestureRecognizer = NO;
         [self.contentView addSubview:self.selectedIndicator];
         
 //        self.maskImageView = [[UIImageView alloc]initWithFrame:self.contentView.bounds];

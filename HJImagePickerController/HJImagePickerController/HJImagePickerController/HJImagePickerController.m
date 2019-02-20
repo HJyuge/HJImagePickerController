@@ -144,7 +144,7 @@
 }
 
 - (void)didClickPreViewBtn {
-    HJPhotoPreviewController *photoPreviewController = [[HJPhotoPreviewController alloc]initWithSelectedPhoto:self.selectedAssetModels selectedDic:self.selectedAssetModelsDic selectedOriginImage:self.bottomView.isSelected];
+    HJPhotoPreviewController *photoPreviewController = [[HJPhotoPreviewController alloc]initWithSelectedPhoto:self.selectedAssetModels selectedOriginImage:self.bottomView.isSelected];
     [self.navigationController pushViewController:photoPreviewController animated:YES];
 }
 
