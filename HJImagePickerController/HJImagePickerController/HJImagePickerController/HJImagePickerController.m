@@ -10,7 +10,6 @@
 #import <Photos/Photos.h>
 #import "HJAssetCell.h"
 #import "HJImagePickerConstant.h"
-#import "HJAssetModel.h"
 #import "HJAblumsController.h"
 #import "HJImagePickerView.h"
 #import "HJPhotoPreviewController.h"
@@ -143,6 +142,9 @@ HJPhotoPreviewControllerDelegate
 }
 
 - (void)doneClikeCancelButton {
+    if ([self.delegate respondsToSelector:@selector(imagePickerControllerDidCancel:)]) {
+        [self.delegate imagePickerControllerDidCancel:self];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -156,8 +158,11 @@ HJPhotoPreviewControllerDelegate
     [self.navigationController pushViewController:photoPreviewController animated:YES];
 }
 
-- (void)didClickOrginDeterminebtn{
-    
+- (void)didClickDeterminebtn {
+    if ([self.delegate respondsToSelector:@selector(imagePickerController:didFinishPickingImages:)]) {
+        [self.delegate imagePickerController:self didFinishPickingImages:self.selectedAssetModels];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark- HJPhotoPreviewControllerDelegate

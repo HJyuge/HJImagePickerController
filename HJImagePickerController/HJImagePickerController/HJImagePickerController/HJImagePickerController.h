@@ -7,11 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HJAssetModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HJImagePickerController : UIViewController
+@protocol HJImagePickerControllerDelegate;
 
+@interface HJImagePickerController : UIViewController
+@property (nonatomic, weak) id<HJImagePickerControllerDelegate> delegate;
 @end
 
+@protocol HJImagePickerControllerDelegate <NSObject>
+@optional
+- (void)imagePickerController:(HJImagePickerController *)picker didFinishPickingImages:(NSArray <HJAssetModel *>*)images;
+- (void)imagePickerController:(HJImagePickerController *)picker didFinishPickingMedia:(NSData *)Media;//待完善
+- (void)imagePickerControllerDidCancel:(HJImagePickerController *)picker;
+
+@end
 NS_ASSUME_NONNULL_END
