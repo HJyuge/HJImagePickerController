@@ -135,7 +135,6 @@ HJPhotoPreviewControllerDelegate
 }
 #pragma mark- Interaction
 
-
 - (void)doneClikeMoreButton {
     HJAblumsController *ablumsController = [[HJAblumsController alloc]init];
     [self.navigationController pushViewController:ablumsController animated:YES];
@@ -159,6 +158,21 @@ HJPhotoPreviewControllerDelegate
 }
 
 - (void)didClickDeterminebtn {
+    //选择原图
+    if (self.bottomView.selected) {
+        PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+        options.networkAccessAllowed = YES;
+//        options.resizeMode = PHImageRequestOptionsResizeModeFast;
+        for (HJAssetModel *model in self.selectedAssetModels) {
+            [[PHImageManager defaultManager] requestImageDataForAsset:model.asset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+                model.imgData = imageData;
+            }];
+        }
+        
+    } else {
+
+    }
+
     if ([self.delegate respondsToSelector:@selector(imagePickerController:didFinishPickingImages:)]) {
         [self.delegate imagePickerController:self didFinishPickingImages:self.selectedAssetModels];
     }

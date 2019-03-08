@@ -165,7 +165,7 @@ HJImagePickerCellIndicatorDelegate
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (displayScrollViewTag == scrollView.tag) {
-        //房租超出边界改变index
+        //防止超出边界改变index
         if (scrollView.contentOffset.x < 0 || scrollView.contentOffset.x > scrollView.contentSize.width) {
             return;
         }
